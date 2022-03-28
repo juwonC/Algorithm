@@ -146,3 +146,45 @@ void Merge(int input[], int start, int half, int end, int temp[])
 		input[i] = temp[tempIndex++];
 	}
 }
+
+// Quick Sort
+// Time Complexity : O(c n log n)
+// Space Complexity : O(n)
+void QuickSort(int input[], int left, int right)
+{
+	int i = left;
+	int j = right;
+	int pivot = input[(left + right) / 2];
+
+	do
+	{
+		while (input[i] < pivot)
+		{
+			i++;
+		}
+		while (input[j] > pivot)
+		{
+			j--;
+		}
+
+		if ( i <= j )
+		{
+			Swap(input[i], input[j]);
+			i++;
+			j--;
+		}
+	} while (i <= j);
+	// 일반화 시키기 어려운 조건들은 c(상수)로 취급 (단, 0 <= c <= n)
+	// c번 * n번 반복 -> c가 n에 수렴하면 최악의 경우 -> n^2번 반복
+	// 피벗(중심)을 어떻게 찾느냐에 따라 QuickSort의 성능이 달라진다
+
+	// base case & recursive case
+	if (left < j)
+	{
+		QuickSort(input, left, j);
+	}
+	if (i < right)
+	{
+		QuickSort(input, i, right);
+	}
+}

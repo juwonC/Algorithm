@@ -8,3 +8,4 @@ void BubbleSort(int input[], int size);
 void InsertionSort(int input[], int size);
 void MergeSort(int input[], int start, int end, int temp[]);
 void Merge(int input[], int start, int half, int end, int temp[]);
+void QuickSort(int input[], int left, int right);

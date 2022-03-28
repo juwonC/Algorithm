@@ -11,7 +11,8 @@ int main()
 	// SelectionSort(array, SIZE);
 	// BubbleSort(array, SIZE);
 	// InsertionSort(array, SIZE);
-	MergeSort(array, 0, SIZE - 1, tempArray);
+	// MergeSort(array, 0, SIZE - 1, tempArray);
+	QuickSort(array, 0, SIZE - 1);
 
 	PrintArray(array, SIZE);
 }
