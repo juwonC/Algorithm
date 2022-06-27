@@ -52,6 +52,8 @@ namespace mytree
 			pParent->mpRight = CreateNode(data);
 			return pParent->mpRight;
 		}
+
+		void Visit(Node* node);
+		void BreadthFirst();
 	};
 }
-
