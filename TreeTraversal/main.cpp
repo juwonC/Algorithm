@@ -17,4 +17,8 @@ int main()
 	myTree.InsertRight(pNode, 7);
 
 	myTree.BreadthFirst();
+	std::cout << std::endl;
+	myTree.DepthFirst();
+	std::cout << std::endl;
+	myTree.DepthFirstRecursive(pRoot);
 }
