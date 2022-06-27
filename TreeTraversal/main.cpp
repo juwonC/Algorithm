@@ -26,4 +26,8 @@ int main()
 	std::cout << std::endl;
 	myTree.PostOrder(pRoot);
 	std::cout << std::endl;
+
+	std::cout << myTree.Sum(pRoot) << std::endl;
+	std::cout << myTree.Search(pRoot, 2) << std::endl;
+	std::cout << myTree.Search(pRoot, 9) << std::endl;
 }

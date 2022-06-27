@@ -59,5 +59,8 @@ namespace mytree
 		void DepthFirstRecursive(Node* pNode);
 		void InOrder(Node* pNode);
 		void PostOrder(Node* pNode);
+
+		int Sum(Node* pNode);
+		bool Search(Node* pNode, int value);
 	};
 }

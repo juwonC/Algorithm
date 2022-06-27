@@ -93,3 +93,23 @@ void mytree::BinaryTree::PostOrder(Node* pNode)
 	PostOrder(pNode->mpRight);
 	Visit(pNode);
 }
+
+int mytree::BinaryTree::Sum(Node* pNode)
+{
+	if (pNode == nullptr)
+	{
+		return 0;
+	}
+	
+	return pNode->mData + Sum(pNode->mpLeft) + Sum(pNode->mpRight);
+}
+
+bool mytree::BinaryTree::Search(Node* pNode, int value)
+{
+	if (pNode == nullptr)
+	{
+		return false;
+	}
+	
+	return pNode->mData == value || Search(pNode->mpLeft, value) || Search(pNode->mpRight, value);
+}
