@@ -21,4 +21,9 @@ int main()
 	myTree.DepthFirst();
 	std::cout << std::endl;
 	myTree.DepthFirstRecursive(pRoot);
+	std::cout << std::endl;
+	myTree.InOrder(pRoot);
+	std::cout << std::endl;
+	myTree.PostOrder(pRoot);
+	std::cout << std::endl;
 }

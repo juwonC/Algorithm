@@ -55,7 +55,7 @@ void mytree::BinaryTree::DepthFirst()
 	}
 }
 
-void mytree::BinaryTree::DepthFirstRecursive(Node* pNode)
+void mytree::BinaryTree::DepthFirstRecursive(Node* pNode) // Pre-Order
 {
 	// base case
 	if (pNode == nullptr)
@@ -68,4 +68,28 @@ void mytree::BinaryTree::DepthFirstRecursive(Node* pNode)
 	// recursive case
 	DepthFirstRecursive(pNode->mpLeft);
 	DepthFirstRecursive(pNode->mpRight);
+}
+
+void mytree::BinaryTree::InOrder(Node* pNode)
+{
+	if (pNode == nullptr)
+	{
+		return;
+	}
+
+	InOrder(pNode->mpLeft);
+	Visit(pNode);
+	InOrder(pNode->mpRight);
+}
+
+void mytree::BinaryTree::PostOrder(Node* pNode)
+{
+	if (pNode == nullptr)
+	{
+		return;
+	}
+
+	PostOrder(pNode->mpLeft);
+	PostOrder(pNode->mpRight);
+	Visit(pNode);
 }

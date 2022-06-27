@@ -57,5 +57,7 @@ namespace mytree
 		void BreadthFirst();
 		void DepthFirst();
 		void DepthFirstRecursive(Node* pNode);
+		void InOrder(Node* pNode);
+		void PostOrder(Node* pNode);
 	};
 }
