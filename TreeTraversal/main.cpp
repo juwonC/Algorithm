@@ -1,5 +1,6 @@
 #include <iostream>
 #include "BinaryTree.h"
+#include "Bst.h"
 
 int main()
 {
@@ -30,4 +31,13 @@ int main()
 	std::cout << myTree.Sum(pRoot) << std::endl;
 	std::cout << myTree.Search(pRoot, 2) << std::endl;
 	std::cout << myTree.Search(pRoot, 9) << std::endl;
+
+
+	mytree::BinarySearchTree bst;
+
+	mytree::SearchNode* root = bst.Insert(nullptr, 8);
+	bst.Insert(root, 3);
+	bst.Insert(root, 10);
+	bst.Insert(root, 1);
+	bst.Insert(root, 6);
 }
