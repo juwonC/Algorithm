@@ -40,4 +40,11 @@ int main()
 	bst.Insert(root, 10);
 	bst.Insert(root, 1);
 	bst.Insert(root, 6);
+
+	bst.PreOrder(root);
+	std::cout << std::endl;
+	bst.InOrder(root);
+	std::cout << std::endl;
+	bst.PostOrder(root);
+	std::cout << std::endl;
 }

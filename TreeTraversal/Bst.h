@@ -57,5 +57,11 @@ namespace mytree
 
 			return pParent;
 		}
+
+	public:
+		void Visit(SearchNode* pNode);
+		void PreOrder(SearchNode* pNode);
+		void InOrder(SearchNode* pNode);
+		void PostOrder(SearchNode* pNode);
 	};
 }
