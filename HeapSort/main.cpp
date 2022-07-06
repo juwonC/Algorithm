@@ -24,4 +24,14 @@ int main()
 	}
 
 	std::cout << std::endl;
+
+	// Min Heap
+	v = { 4, 2, 5, 1, 3 };
+
+	std::make_heap(v.begin(), v.end(), std::greater<>());
+
+	for (auto& e : v)
+	{
+		std::cout << e << " ";
+	}
 }
