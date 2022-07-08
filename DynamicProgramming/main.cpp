@@ -1,16 +1,29 @@
 #include <iostream>
+#include <map>
 
-int Fibonacci(int n)
+using history = std::map<int, int64_t>;
+
+int64_t Fibonacci(int n, history& h)
 {
+	if (h.count(n) == 1)
+	{
+		return h[n];
+	}
+	
+	// base case
 	if (n <= 2)
 	{
 		return 1;
 	}
 
-	return Fibonacci(n - 1) + Fibonacci(n - 2);
+	// recursive case
+	h[n] = Fibonacci(n - 1, h) + Fibonacci(n - 2, h);
+	return h[n];
 }
 
 int main()
 {
-	std::cout << Fibonacci(10);
+	history h;
+	
+	std::cout << Fibonacci(50, h);
 }
