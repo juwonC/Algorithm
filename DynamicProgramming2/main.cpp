@@ -40,9 +40,16 @@
 //}
 
 using int_vector = std::vector<int>;
+using history = std::map<int, std::shared_ptr<int_vector>>;
 
-std::shared_ptr<int_vector> HowAccumulate(int sum, const int_vector& numbers)
+std::shared_ptr<int_vector> HowAccumulate(int sum, const int_vector& numbers, std::shared_ptr<history> h)
 {
+	// solved
+	if (h->count(sum) == 1)
+	{
+		return (*h)[sum];
+	}
+	
 	// base case
 	if (sum == 0)
 	{
@@ -59,15 +66,17 @@ std::shared_ptr<int_vector> HowAccumulate(int sum, const int_vector& numbers)
 	{
 		int remain = sum - e;
 
-		auto result = HowAccumulate(remain, numbers);
+		auto result = HowAccumulate(remain, numbers, h);
 
 		if (result != nullptr)
 		{
 			result->push_back(e);
-			return result;
+			(*h)[sum] = result;
+			return (*h)[sum];
 		}
 	}
 
+	(*h)[sum] = nullptr;
 	return nullptr;
 }
 
@@ -102,7 +111,7 @@ int main()
 	//std::cout << CanAccumulate(1000, { 7, 14 }, h) << std::endl;
 	//h.clear();
 
-	Print(HowAccumulate(8, { 2, 3, 5 }));
-	Print(HowAccumulate(7, { 1, 4 }));
-	Print(HowAccumulate(1000, { 7, 14 }));
+	Print(HowAccumulate(8, { 2, 3, 5 }, std::make_shared<history>()));
+	Print(HowAccumulate(7, { 1, 4 }, std::make_shared<history>()));
+	Print(HowAccumulate(1000, { 7, 14 }, std::make_shared<history>()));
 }
