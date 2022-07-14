@@ -42,14 +42,45 @@
 using int_vector = std::vector<int>;
 using history = std::map<int, std::shared_ptr<int_vector>>;
 
-std::shared_ptr<int_vector> HowAccumulate(int sum, const int_vector& numbers, std::shared_ptr<history> h)
+//std::shared_ptr<int_vector> HowAccumulate(int sum, const int_vector& numbers, std::shared_ptr<history> h)
+//{
+//	// solved
+//	if (h->count(sum) == 1)
+//	{
+//		return (*h)[sum];
+//	}
+//	
+//	// base case
+//	if (sum == 0)
+//	{
+//		return std::make_shared<int_vector>();
+//	}
+//
+//	if (sum < 0)
+//	{
+//		return nullptr;
+//	}
+//
+//	// recursive case
+//	for (auto e : numbers)
+//	{
+//		int remain = sum - e;
+//		auto result = HowAccumulate(remain, numbers, h);
+//
+//		if (result != nullptr)
+//		{
+//			result->push_back(e);
+//			(*h)[sum] = result;
+//			return (*h)[sum];
+//		}
+//	}
+//
+//	(*h)[sum] = nullptr;
+//	return nullptr;
+//}
+
+std::shared_ptr<int_vector> BestAccumulate(int sum, const int_vector& numbers)
 {
-	// solved
-	if (h->count(sum) == 1)
-	{
-		return (*h)[sum];
-	}
-	
 	// base case
 	if (sum == 0)
 	{
@@ -62,22 +93,28 @@ std::shared_ptr<int_vector> HowAccumulate(int sum, const int_vector& numbers, st
 	}
 
 	// recursive case
+	std::shared_ptr<int_vector> best;
+
 	for (auto e : numbers)
 	{
 		int remain = sum - e;
-
-		auto result = HowAccumulate(remain, numbers, h);
+		auto result = BestAccumulate(remain, numbers);
 
 		if (result != nullptr)
 		{
-			result->push_back(e);
-			(*h)[sum] = result;
-			return (*h)[sum];
+			std::shared_ptr<int_vector> v = std::make_shared<int_vector>();
+			v->resize(result->size());
+			std::copy(result->begin(), result->end(), v->begin());
+			v->push_back(e);
+
+			if (best == nullptr || v->size() < best->size())
+			{
+				best = v;
+			}
 		}
 	}
 
-	(*h)[sum] = nullptr;
-	return nullptr;
+	return best;
 }
 
 void Print(std::shared_ptr<int_vector> result)
@@ -111,7 +148,12 @@ int main()
 	//std::cout << CanAccumulate(1000, { 7, 14 }, h) << std::endl;
 	//h.clear();
 
-	Print(HowAccumulate(8, { 2, 3, 5 }, std::make_shared<history>()));
-	Print(HowAccumulate(7, { 1, 4 }, std::make_shared<history>()));
-	Print(HowAccumulate(1000, { 7, 14 }, std::make_shared<history>()));
+
+	//Print(HowAccumulate(8, { 2, 3, 5 }, std::make_shared<history>()));
+	//Print(HowAccumulate(7, { 1, 4 }, std::make_shared<history>()));
+	//Print(HowAccumulate(1000, { 7, 14 }, std::make_shared<history>()));
+
+
+	Print(BestAccumulate(8, { 2, 3, 5 }));
+	Print(BestAccumulate(7, { 5, 3, 4, 7 }));
 }
