@@ -79,8 +79,14 @@ using history = std::map<int, std::shared_ptr<int_vector>>;
 //	return nullptr;
 //}
 
-std::shared_ptr<int_vector> BestAccumulate(int sum, const int_vector& numbers)
+std::shared_ptr<int_vector> BestAccumulate(int sum, const int_vector& numbers, std::shared_ptr<history> h)
 {
+	// solved
+	if (h->count(sum) == 1)
+	{
+		return (*h)[sum];
+	}
+	
 	// base case
 	if (sum == 0)
 	{
@@ -98,7 +104,7 @@ std::shared_ptr<int_vector> BestAccumulate(int sum, const int_vector& numbers)
 	for (auto e : numbers)
 	{
 		int remain = sum - e;
-		auto result = BestAccumulate(remain, numbers);
+		auto result = BestAccumulate(remain, numbers, h);
 
 		if (result != nullptr)
 		{
@@ -114,7 +120,8 @@ std::shared_ptr<int_vector> BestAccumulate(int sum, const int_vector& numbers)
 		}
 	}
 
-	return best;
+	(*h)[sum] = best;
+	return (*h)[sum];
 }
 
 void Print(std::shared_ptr<int_vector> result)
@@ -154,6 +161,7 @@ int main()
 	//Print(HowAccumulate(1000, { 7, 14 }, std::make_shared<history>()));
 
 
-	Print(BestAccumulate(8, { 2, 3, 5 }));
-	Print(BestAccumulate(7, { 5, 3, 4, 7 }));
+	Print(BestAccumulate(8, { 2, 3, 5 }, std::make_shared<history>()));
+	Print(BestAccumulate(7, { 5, 3, 4, 7 }, std::make_shared<history>()));
+	Print(BestAccumulate(1000, { 7, 14 }, std::make_shared<history>()));
 }
