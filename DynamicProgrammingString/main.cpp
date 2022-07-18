@@ -1,9 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 
-bool CanGenerate(std::string target, const std::vector<std::string>& stringList)
+using history = std::map<std::string, bool>;
+
+bool CanGenerate(std::string target, const std::vector<std::string>& stringList, history& h)
 {
+	// solved
+	if (h.count(target) == 1)
+	{
+		return h[target];
+	}
+
 	// base case
 	if (target == "")
 	{
@@ -17,7 +26,7 @@ bool CanGenerate(std::string target, const std::vector<std::string>& stringList)
 		{
 			const std::string subs = target.substr(e.length());
 
-			if (CanGenerate(subs, stringList))
+			if (CanGenerate(subs, stringList, h))
 			{
 				return true;
 			}
@@ -29,7 +38,11 @@ bool CanGenerate(std::string target, const std::vector<std::string>& stringList)
 
 int main()
 {
-	std::cout << CanGenerate("abcd", { "a", "b", "c", "d" }) << std::endl;
-	std::cout << CanGenerate("abcdef", { "ab", "abc", "cd", "def", "abcd" }) << std::endl;
-	std::cout << CanGenerate("HelloWorld", { "ab", "abc", "cd", "def", "abcd" }) << std::endl;
+	history h;
+	
+	std::cout << CanGenerate("abcd", { "a", "b", "c", "d" }, h) << std::endl;
+	h.clear();
+	std::cout << CanGenerate("abcdef", { "ab", "abc", "cd", "def", "abcd" }, h) << std::endl;
+	h.clear();
+	std::cout << CanGenerate("HelloWorld", { "ab", "abc", "cd", "def", "abcd" }, h) << std::endl;
 }
