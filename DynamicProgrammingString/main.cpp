@@ -36,6 +36,36 @@ bool CanGenerate(std::string target, const std::vector<std::string>& stringList,
 	return false;
 }
 
+int CanGenerateCount(std::string target, const std::vector<std::string>& stringlist, history& h)
+{
+	// solved?
+	if (h.count(target) == 1)
+	{
+		return h[target];
+	}
+
+	// base case
+	if (target == "")
+	{
+		return 1;
+	}
+
+	// recursive case
+	int count{};
+
+	for (auto e : stringlist)
+	{
+		if (target.find(e) == 0)
+		{
+			const std::string subs = target.substr(e.length());
+			count += (CanGenerate(subs, stringlist, h));
+		}
+	}
+
+	h[target] = count;
+	return count;
+}
+
 int main()
 {
 	history h;
@@ -45,4 +75,10 @@ int main()
 	std::cout << CanGenerate("abcdef", { "ab", "abc", "cd", "def", "abcd" }, h) << std::endl;
 	h.clear();
 	std::cout << CanGenerate("HelloWorld", { "ab", "abc", "cd", "def", "abcd" }, h) << std::endl;
+	h.clear();
+	
+	std::cout << CanGenerateCount("abcdef", { "ab", "abc", "cd", "def", "abcd", "ef"}, h) << std::endl;
+	h.clear();
+	std::cout << CanGenerateCount("hello", { "he", "h", "e", "llo", "hell" }, h) << std::endl;
+	h.clear();
 }
